@@ -5,7 +5,7 @@ public abstract class Entity : MonoBehaviour {
   [SerializeField]
   protected float speed;
   [SerializeField]
-  protected float acc;
+  protected float accel;
   [SerializeField]
   public Rigidbody2D rb;
   
@@ -30,7 +30,7 @@ public abstract class Entity : MonoBehaviour {
   }
   
   protected void Move(Vector2 dir) {
-    rb.AddForce(dir.normalized * acc);
+    rb.AddForce(dir.normalized * accel);
   }
   
   protected void Rotate(Vector2 dir) {
@@ -40,6 +40,6 @@ public abstract class Entity : MonoBehaviour {
   }
   
   protected virtual void Start() {
-    rb.drag = acc / speed;
+    rb.drag = accel / speed;
   }
 }

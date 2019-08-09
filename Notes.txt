@@ -1,0 +1,63 @@
+
+Pitch
+  
+  Colours and Chaos
+  
+  
+  Colours and Chaos combines:
+  - Health and ammo count
+  - Every single 2D asset pack
+  
+  All image and sound credits go to Kenney.
+  
+  Ghost sprites: 
+  
+Gameplay
+  
+  - play as an asset cloud
+  - e.g. 20 or so green sprites swirling around a point
+  
+  - click to shoot assets
+  - asset launches itself in direction
+  - aoe explosion! else shooting too bland
+    - point effector for juice
+  
+  - touching your own colour adds it to your cloud
+  - touching any other colour removes the asset
+  
+  - arena size is restricted
+  - each bullet has a 
+  - asset fountain in center
+  - leaving arena deletes assets
+  - 
+  
+  - enemy ai?
+    - pathfinding wil be cancer
+  - two players?
+  
+Model
+  
+  need a way to deal with a fuckton of sprites
+  
+  windows batch rename + Resources.Load ez
+  
+  use that to randomize sprite
+  
+Menu
+  
+  caps lock COLOURS AND CHAOS
+  
+  screenshake as each word pops up
+  
+  fade pulse PRESS START
+  
+  fade entire sprite
+  
+  fade in instructions
+  (wasd move, click throw, losing all objects = death)
+  
+  scene change choose your color
+  
+  
+  
+  
