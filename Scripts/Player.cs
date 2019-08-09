@@ -14,7 +14,6 @@ public class Player : Entity {
   private SpriteRenderer spriteRenderer;
   [SerializeField]
   private Bullet[] bullets;
-  // private 
   private int index;
   [SerializeField]
   private Transform face;
