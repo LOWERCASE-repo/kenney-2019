@@ -1,21 +1,27 @@
 using UnityEngine;
 using System.Collections;
 
+// background colour depends on leading ghost
+
 public class Player : Entity {
   
   private Vector2 mousePos;
   
   [SerializeField]
-  private Weapon weapon;
-  
+  private Sprite sprite;
+  [SerializeField]
+  private SpriteRenderer spriteRenderer;
+  [SerializeField]
+  private Bullet[] bullets;
   
   protected override void Start() {
     base.Start();
   }
   
   protected void Update() {
-    Debug.Log(Input.GetButton("Shoot"));
-    weapon.SetTriggered(Input.GetButton("Shoot"));
+    if (Input.GetButtonDown("Shoot")) {
+      Debug.Log("sprite swapped");
+    }
   }
   
   protected void FixedUpdate() {
@@ -23,6 +29,5 @@ public class Player : Entity {
     // Move(pos - rb.position);
     Vector2 moveDir = new Vector2(Input.GetAxisRaw("MoveHorz"), Input.GetAxisRaw("MoveVert"));
     Move(moveDir);
-    weapon.Rotate(mousePos - rb.position);
   }
 }

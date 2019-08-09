@@ -2,9 +2,13 @@
 Pitch
   
   Colours and Chaos
-
-  An unlikely combination of animals, tilesets, ufos, etc etc
-  blast each other in beautifully vibrant mayhem.
+  
+  
+  Colours and Chaos combines:
+  - Health and ammo count
+  - Every single 2D asset pack
+  
+  All image and sound credits go to Kenney.
   
 Gameplay
   
@@ -20,6 +24,7 @@ Gameplay
   - touching any other colour removes the asset
   
   - arena size is restricted
+  - each bullet has a 
   - asset fountain in center
   - leaving arena deletes assets
   - 
@@ -27,3 +32,15 @@ Gameplay
   - enemy ai?
     - pathfinding wil be cancer
   - two players?
+  
+Model
+  
+  need a way to deal with a fuckton of sprites
+  
+  windows batch rename + Resources.Load ez
+  
+  use that to randomize sprite
+  
+  
+  
+  
