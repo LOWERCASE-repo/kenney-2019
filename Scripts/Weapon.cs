@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Weapon : MonoBehaviour {
   // based on state graph
@@ -7,14 +6,20 @@ public class Weapon : MonoBehaviour {
   [SerializeField]
   private Animator animator;
   [SerializeField]
-  private GameObject[] bullets; // pooling
+  private GameObject[] bullets;
+  private int index;
   
   internal void Shoot() { // animation event
-    Debug.Log("hiotnehuason");
+    Bullet bullet = bullets[index];
+    bullet.rb.position = transform.position;
+    bullets[index].Init(transform.up);
+    bullets[index].SetActive(true);
+    index = (index + 1) % bullets.Length;
   }
   
   internal void SetTriggered(bool triggered) {
     animator.SetBool("Triggered", triggered);
+    // idle into muzzle into recovery
   }
   
   internal void Rotate(Vector2 dir) {

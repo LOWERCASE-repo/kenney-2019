@@ -1,0 +1,29 @@
+
+Pitch
+  
+  Colours and Chaos
+
+  An unlikely combination of animals, tilesets, ufos, etc etc
+  blast each other in beautifully vibrant mayhem.
+  
+Gameplay
+  
+  - play as an asset cloud
+  - e.g. 20 or so green sprites swirling around a point
+  
+  - click to shoot assets
+  - asset launches itself in direction
+  - aoe explosion! else shooting too bland
+    - point effector for juice
+  
+  - touching your own colour adds it to your cloud
+  - touching any other colour removes the asset
+  
+  - arena size is restricted
+  - asset fountain in center
+  - leaving arena deletes assets
+  - 
+  
+  - enemy ai?
+    - pathfinding wil be cancer
+  - two players?
