@@ -25,7 +25,14 @@ public class Bullet : Entity {
   }
   
   internal void Fade() { // called by animator
-    
+    gameObject.SetActive(false);
+  }
+  
+  private void StartFade() {
+    trailRenderer.emitting = false;
+    rb.angularDrag = 2f;
+    rb.linearDrag = 2f;
+    // animator.SetTrigger("Fade");
   }
   
   private void OnEnable() {
@@ -70,7 +77,7 @@ public class Bullet : Entity {
   
   private void OnTriggerExit2D(Collider2D collider) {
     if (collider.gameObject.name == "Arena") {
-      gameObject.SetActive(false);
+      Fade(); // should set trigger instead
     }
   }
 }
