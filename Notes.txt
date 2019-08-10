@@ -1,15 +1,11 @@
   
 TODO
+
+  - arena resizing
+  - arena colour switching
+  - colour choosing
+  - menu
   
-  - ghost particle trails
-  - combat
-  - two kinds of projectile deaths:
-    - particles if collision, 
-  - straight line mouth ghost face before ghost death
-  
-  - ai
-  
-  - colour match player
   
 Menu
   

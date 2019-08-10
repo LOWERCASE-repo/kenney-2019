@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb6d03fca0edc747a94a2960469ce0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  accel: 40
+  speed: 20
+  accel: 30
   rb: {fileID: 6338921479171680296}
   animator: {fileID: 1641369433833160589}
   spriteRenderer: {fileID: 6338921479171680297}
@@ -72,7 +72,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: efbc88b7a7f42034bbddcbefcef9106c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

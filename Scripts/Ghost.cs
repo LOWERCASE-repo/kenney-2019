@@ -5,6 +5,9 @@ using System.Collections;
 
 public abstract class Ghost : Entity {
   
+  [SerializeField]
+  protected Scorekeeper scorekeeper;
+  
   protected Vector2 mousePos;
   [SerializeField]
   protected Bullet[] bullets;
@@ -23,6 +26,30 @@ public abstract class Ghost : Entity {
   private Sprite neutral;
   [SerializeField]
   private Sprite sad;
+  [SerializeField]
+  private AudioSource audioSource;
+  
+  [SerializeField]
+  protected Animator animator;
+  
+  protected int health;
+  
+  internal void Fade() { // called by animator
+    gameObject.SetActive(false);
+  }
+  
+  private float lastPlayed;
+  
+  protected void Throw(Vector2 pos) {
+    Bullet bullet = bullets[index];
+    bullet.Throw(pos - bullet.rb.position);
+    index = (index + 1) % bullets.Length;
+    if (Time.time - lastPlayed > 0.5f) {
+      string assetName = "Music/" + LayerMask.LayerToName(gameObject.layer) + "/(" + (1 + (int)(Random.value * 15f - Mathf.Epsilon)) + ")";
+      audioSource.PlayOneShot(Resources.Load<AudioClip>(assetName));
+      lastPlayed = Time.time;
+    }
+  }
   
   private IEnumerator Regen() {
     bool hurt = false;
@@ -32,7 +59,7 @@ public abstract class Ghost : Entity {
       }
     }
     if (hurt) {
-      yield return new WaitForSecondsRealtime(3f);
+      yield return new WaitForSecondsRealtime(0.5f);
       for (int i = 0; i < bullets.Length; i++) {
         Bullet bullet = bullets[(index + i) % bullets.Length];
         if (!bullet.gameObject.activeSelf) {
@@ -59,19 +86,26 @@ public abstract class Ghost : Entity {
     body.rotation = rotation;
     face.rotation = rotation;
     
-    int health = 0;
+    health = 0;
     foreach (Bullet bullet in bullets) {
-      if (bullet.gameObject.activeSelf) {
+      if (bullet.gameObject.activeSelf && bullet.throwDir == Vector2.zero) {
         health++;
       }
     }
-    Debug.Log(health);
-    if (health > 4) {
+    if (health > 6) {
       spriteRenderer.sprite = happy;
-    } else if (health > 2) {
+    } else if (health > 4) {
       spriteRenderer.sprite = neutral;
     } else {
       spriteRenderer.sprite = sad;
+    }
+  }
+  
+  protected virtual void OnCollisionEnter2D(Collision2D collision) {
+    if (collision.gameObject.name != "Arena") {
+      animator.SetTrigger("Die");
+      spriteRenderer.sprite = sad;
+      scorekeeper.SetColor(LayerMask.LayerToName(collision.gameObject.layer));
     }
   }
 }

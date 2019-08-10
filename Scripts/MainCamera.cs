@@ -9,18 +9,26 @@ public class MainCamera : MonoBehaviour {
   [SerializeField]
   private float lerpMag;
   [SerializeField]
-  private Camera camera;
+  private Camera cam;
   
   private float zoom;
+  
+  private bool frozen;
+  
+  internal void Freeze() {
+    frozen = true;
+  }
+  
   private void Start() {
-    zoom = camera.orthographicSize;
-    camera.orthographicSize = 0.01f;
+    zoom = cam.orthographicSize;
+    cam.orthographicSize = 0.01f;
   }
   
   protected void Update() {
+    if (frozen) return;
     mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     transform.position = Vector2.Lerp(player.position, mousePos, lerpMag);
     transform.position -= Vector3.forward * 10f;
-    camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, zoom, 0.2f);
+    cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoom, 0.2f);
   }
 }

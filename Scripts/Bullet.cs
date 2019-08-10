@@ -14,8 +14,10 @@ public class Bullet : Entity {
   [SerializeField]
   private TrailRenderer trailRenderer;
   
-  private Vector2 throwDir;
-  private bool hit; // farm those collision fx
+  private Collider2D collider;
+  
+  internal Vector2 throwDir;
+  private bool hit;
   
   internal void Throw(Vector2 throwDir) {
     this.throwDir = throwDir;
@@ -23,7 +25,6 @@ public class Bullet : Entity {
     trailRenderer.emitting = true;
     animator.SetTrigger("Throw");
     rb.velocity = Vector2.zero;
-    rb.drag = 1f;
   }
   
   internal void Fade() { // called by animator
@@ -35,6 +36,7 @@ public class Bullet : Entity {
     rb.angularDrag = 2f;
     rb.drag = 2f;
     animator.SetTrigger("Fade");
+    Destroy(collider);
   }
   
   private void OnEnable() {
@@ -44,13 +46,13 @@ public class Bullet : Entity {
     spriteRenderer.sprite = Resources.Load<Sprite>(assetName);
     spriteRenderer.sortingOrder = (Random.value < 0.5) ? -1 : 1;
     Destroy(GetComponent<PolygonCollider2D>());
-    gameObject.AddComponent<PolygonCollider2D>();
+    collider = gameObject.AddComponent<PolygonCollider2D>();
     rb.velocity = Random.insideUnitCircle;
     repeller.layer = LayerMask.NameToLayer("Repeller");
     trailRenderer.emitting = false;
     throwDir = Vector2.zero;
-    hit = false;
     animator.ResetTrigger("Fade");
+    hit = false;
   }
   
   private void FixedUpdate() {
@@ -58,11 +60,16 @@ public class Bullet : Entity {
     if (throwDir == Vector2.zero) {
       Move(dir);
       Rotate(dir);
-    } else {
-      rb.drag = 0f;
+    } else if (!hit) {
+      rb.drag = 1f;
       // accel = throwAccel;
       Move(throwDir); // might have to ram
       rb.angularVelocity = rb.velocity.sqrMagnitude;
+    } else {
+      Move(rb.velocity);
+    }
+    if (!player.gameObject.activeSelf && collider != null) {
+      StartFade();
     }
   }
   
@@ -72,9 +79,8 @@ public class Bullet : Entity {
         StartFade();
       }
     } else {
-      if (collision.gameObject.name == "Arena") {
-        StartFade();
-      }
+      hit = true;
+      StartFade();
     }
     trailRenderer.emitting = false;
   }
