@@ -22,6 +22,8 @@ public class Bullet : Entity {
     repeller.layer = gameObject.layer;
     trailRenderer.emitting = true;
     animator.SetTrigger("Throw");
+    rb.velocity = Vector2.zero;
+    rb.drag = 1f;
   }
   
   internal void Fade() { // called by animator
@@ -31,8 +33,8 @@ public class Bullet : Entity {
   private void StartFade() {
     trailRenderer.emitting = false;
     rb.angularDrag = 2f;
-    rb.linearDrag = 2f;
-    // animator.SetTrigger("Fade");
+    rb.drag = 2f;
+    animator.SetTrigger("Fade");
   }
   
   private void OnEnable() {
@@ -48,6 +50,7 @@ public class Bullet : Entity {
     trailRenderer.emitting = false;
     throwDir = Vector2.zero;
     hit = false;
+    animator.ResetTrigger("Fade");
   }
   
   private void FixedUpdate() {
@@ -63,21 +66,16 @@ public class Bullet : Entity {
     }
   }
   
-  private void OnCollisionEnter2D() {
-    // death anim
-    // can only ever collide with enemies
+  private void OnCollisionEnter2D(Collision2D collision) {
+    if (throwDir == Vector2.zero) {
+      if (collision.gameObject.name != "Arena") {
+        StartFade();
+      }
+    } else {
+      if (collision.gameObject.name == "Arena") {
+        StartFade();
+      }
+    }
     trailRenderer.emitting = false;
-  }
-  
-  private void OnTriggerEnter2D(Collider2D collider) {
-    if (throwDir != Vector2.zero && collider.gameObject.layer != gameObject.layer) {
-      Debug.Log("kaboom");
-    }
-  }
-  
-  private void OnTriggerExit2D(Collider2D collider) {
-    if (collider.gameObject.name == "Arena") {
-      Fade(); // should set trigger instead
-    }
   }
 }

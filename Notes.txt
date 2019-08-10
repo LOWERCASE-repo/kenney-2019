@@ -2,18 +2,14 @@
 TODO
   
   - ghost particle trails
-  - better combat: no explosions, keep 2x size, just dont destroy on collision if thrown
-    - if both thrown, cancel out
-    - switch directions on hit!
+  - combat
   - two kinds of projectile deaths:
     - particles if collision, 
   - straight line mouth ghost face before ghost death
   
   - ai
   
-  - menu
-  
-  - rotating ghosts
+  - colour match player
   
 Menu
   
@@ -30,6 +26,11 @@ Menu
   
   scene change choose your color
   
+Pitch
   
+  notable asset usages
+  - separated and customized the face from the ghost sprite for
+    expressive players
+  - used the same crosshair for particle effects and the arena
   
   
