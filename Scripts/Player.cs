@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 // background colour depends on leading ghost
 
@@ -14,7 +13,6 @@ public class Player : Entity {
   private SpriteRenderer spriteRenderer;
   [SerializeField]
   private Bullet[] bullets;
-  // private 
   private int index;
   [SerializeField]
   private Transform face;

@@ -14,7 +14,8 @@ public class Bullet : Entity {
   [SerializeField]
   private TrailRenderer trailRenderer;
   
-  internal Vector2 throwDir;
+  private Vector2 throwDir;
+  private bool hit; // farm those collision fx
   
   internal void Throw(Vector2 throwDir) {
     this.throwDir = throwDir;
@@ -23,9 +24,14 @@ public class Bullet : Entity {
     animator.SetTrigger("Throw");
   }
   
+  internal void Fade() { // called by animator
+    
+  }
+  
   private void OnEnable() {
     base.Start();
-    string assetName = LayerMask.LayerToName(gameObject.layer) + "/ (" + (1 + (int)(Random.value * 17f - Mathf.Epsilon)) + ")";
+    // unlock more over time?
+    string assetName = LayerMask.LayerToName(gameObject.layer) + "/ (" + (1 + (int)(Random.value * 140f - Mathf.Epsilon)) + ")";
     spriteRenderer.sprite = Resources.Load<Sprite>(assetName);
     spriteRenderer.sortingOrder = (Random.value < 0.5) ? -1 : 1;
     Destroy(GetComponent<PolygonCollider2D>());
@@ -34,6 +40,7 @@ public class Bullet : Entity {
     repeller.layer = LayerMask.NameToLayer("Repeller");
     trailRenderer.emitting = false;
     throwDir = Vector2.zero;
+    hit = false;
   }
   
   private void FixedUpdate() {
@@ -52,6 +59,7 @@ public class Bullet : Entity {
   private void OnCollisionEnter2D() {
     // death anim
     // can only ever collide with enemies
+    trailRenderer.emitting = false;
   }
   
   private void OnTriggerEnter2D(Collider2D collider) {
