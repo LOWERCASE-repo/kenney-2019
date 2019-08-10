@@ -27,7 +27,9 @@ public class Scorekeeper : MonoBehaviour {
   [Header("UI stuff")]
   [SerializeField]
   private Text text;
+  [SerializeField]
   private Color[] ranks;
+  [SerializeField]
   private Animator textAnim;
   
   private int index;
@@ -58,7 +60,17 @@ public class Scorekeeper : MonoBehaviour {
     yield return new WaitForSecondsRealtime(0.5f);
     mainCam.Freeze();
     Time.timeScale = 0f;
-    textAnim.SetTrigger("Display");
+    
+    switch (deaths) {
+      case 1: text.text = "FOURTH"; break;
+      case 2: text.text = "THIRD"; break;
+      case 3: text.text = "SECOND"; break;
+      case 4: text.text = "FIRST!"; break;
+    }
+    text.color = ranks[deaths - 1];
+    
+    // change text and colour
+    textAnim.SetTrigger("End");
     StartCoroutine(Restart());
   }
   
@@ -66,7 +78,8 @@ public class Scorekeeper : MonoBehaviour {
     while (!Input.GetButton("Shoot")) {
       yield return null;
     }
-    SceneManager.SetActiveScene(0);
+    Time.timeScale = 1.0f;
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }
   
   private void Start() {
