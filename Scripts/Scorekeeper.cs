@@ -32,6 +32,9 @@ public class Scorekeeper : MonoBehaviour {
   [SerializeField]
   private Animator textAnim;
   
+  [SerializeField]
+  private Player player;
+  
   private int index;
   private int deaths;
   
@@ -48,7 +51,9 @@ public class Scorekeeper : MonoBehaviour {
     } else if (deaths == 2) {
       animator.SetTrigger("DeathTwo");
     }
-    Debug.Log(deaths);
+    if (deaths > 2) {
+      EndGame();
+    }
   }
   
   internal void EndGame() {
@@ -61,16 +66,24 @@ public class Scorekeeper : MonoBehaviour {
     mainCam.Freeze();
     Time.timeScale = 0f;
     
+    text.color = ranks[deaths - 1];
     switch (deaths) {
       case 1: text.text = "FOURTH"; break;
       case 2: text.text = "THIRD"; break;
-      case 3: text.text = "SECOND"; break;
-      case 4: text.text = "FIRST!"; break;
+      case 3:
+        if (player.alive) {
+          text.text = "FIRST!";
+          text.color = ranks[3];
+        } else {
+          text.text = "SECOND";
+        }
+      break;
     }
-    text.color = ranks[deaths - 1];
     
     // change text and colour
     textAnim.SetTrigger("End");
+    
+    yield return new WaitForSecondsRealtime(1f);
     StartCoroutine(Restart());
   }
   
@@ -90,6 +103,5 @@ public class Scorekeeper : MonoBehaviour {
   private void Update() {
     arena.color = Color.Lerp(arena.color, arenaColors[index], 0.1f);
     cam.backgroundColor = Color.Lerp(cam.backgroundColor, backgroundColors[index], 0.1f);
-    if (deaths > 3) EndGame();
   }
 }

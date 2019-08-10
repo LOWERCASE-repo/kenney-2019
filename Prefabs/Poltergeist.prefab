@@ -70,6 +70,7 @@ MonoBehaviour:
   face: {fileID: 6840239121063910597}
   body: {fileID: 6840239121482529036}
   spriteRenderer: {fileID: 6840239121063910594}
+  nootNoot: {fileID: 21300000, guid: 5cdde4d00a4abd541900aac4dbf7809d, type: 3}
   happy: {fileID: 21300000, guid: fb28f8c873523ba45868e80a87e8879f, type: 3}
   neutral: {fileID: 21300000, guid: 5be50ef7827b97b4ea0d0a8636b6b195, type: 3}
   sad: {fileID: 21300000, guid: e05731a9363af754ea0981b42d926114, type: 3}
@@ -147,7 +148,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

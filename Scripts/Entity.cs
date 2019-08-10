@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour {
   [SerializeField]
   protected float accel;
   [SerializeField]
-  public Rigidbody2D rb;
+  internal Rigidbody2D rb;
   
   protected Vector2 Predict(Vector2 pos, Vector2 rVel, float iSpeed) {
     Vector2 rPos = pos - rb.position;

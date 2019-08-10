@@ -42,7 +42,7 @@ public class Bullet : Entity {
   private void OnEnable() {
     base.Start();
     // unlock more over time?
-    string assetName = LayerMask.LayerToName(gameObject.layer) + "/ (" + (1 + (int)(Random.value * 140f - Mathf.Epsilon)) + ")";
+    string assetName = LayerMask.LayerToName(player.gameObject.layer) + "/ (" + (1 + (int)(Random.value * 140f - Mathf.Epsilon)) + ")";
     spriteRenderer.sprite = Resources.Load<Sprite>(assetName);
     spriteRenderer.sortingOrder = (Random.value < 0.5) ? -1 : 1;
     Destroy(GetComponent<PolygonCollider2D>());

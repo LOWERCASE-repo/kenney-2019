@@ -5,14 +5,20 @@ using System.Collections;
 
 public class Player : Ghost {
   
+  internal bool alive;
+  
   protected override void Start() {
     base.Start();
+    alive = true;
   }
   
   protected override void Update() {
     base.Update();
     if (Input.GetButtonDown("Shoot")) {
       Throw(mousePos);
+    }
+    if (Time.timeScale < 1f) {
+      spriteRenderer.sprite = nootNoot;
     }
   }
   
@@ -23,6 +29,9 @@ public class Player : Ghost {
   
   protected override void OnCollisionEnter2D(Collision2D collision) {
     base.OnCollisionEnter2D(collision);
+    if (collision.gameObject.name != "Arena") {
+      alive = false;
+    }
   }
   
   private void OnDisable() {

@@ -14,14 +14,16 @@ public abstract class Ghost : Entity {
   protected int index;
   
   [SerializeField]
-  private Transform face;
+  protected Transform face;
   [SerializeField]
-  private Transform body;
+  protected Transform body;
   
   [SerializeField]
-  private SpriteRenderer spriteRenderer;
+  protected SpriteRenderer spriteRenderer;
   [SerializeField]
-  private Sprite happy;
+  protected Sprite nootNoot;
+  [SerializeField]
+  protected Sprite happy;
   [SerializeField]
   private Sprite neutral;
   [SerializeField]
@@ -76,6 +78,9 @@ public abstract class Ghost : Entity {
   protected override void Start() {
     base.Start();
     StartCoroutine(Regen());
+    foreach (Bullet bullet in bullets) {
+      bullet.gameObject.layer = gameObject.layer;
+    }
   }
   
   protected virtual void Update() {
@@ -92,20 +97,26 @@ public abstract class Ghost : Entity {
         health++;
       }
     }
-    if (health > 6) {
-      spriteRenderer.sprite = happy;
-    } else if (health > 4) {
-      spriteRenderer.sprite = neutral;
-    } else {
-      spriteRenderer.sprite = sad;
+    if (Time.timeScale < 1f) {
+      if (health > 6) {
+        spriteRenderer.sprite = happy;
+      } else if (health > 4) {
+        spriteRenderer.sprite = neutral;
+      } else {
+        spriteRenderer.sprite = sad;
+      }
     }
   }
   
+  private bool sentDeath;
   protected virtual void OnCollisionEnter2D(Collision2D collision) {
     if (collision.gameObject.name != "Arena") {
       animator.SetTrigger("Die");
       spriteRenderer.sprite = sad;
-      scorekeeper.SetColor(LayerMask.LayerToName(collision.gameObject.layer));
+      if (!sentDeath) {
+        scorekeeper.SetColor(LayerMask.LayerToName(collision.gameObject.layer));
+        sentDeath = true;
+      }
     }
   }
 }
