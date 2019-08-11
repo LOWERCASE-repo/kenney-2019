@@ -43,7 +43,7 @@ public class Dummy : Ghost {
   private void OnMouseEnter() {
     spriteRenderer.sprite = nootNoot;
     moused = true;
-    string assetName = "Music/" + LayerMask.LayerToName(gameObject.layer) + "/(" + (1 + (int)(Random.value * 15f - Mathf.Epsilon)) + ")";
+    string assetName = "Music/" + LayerMask.LayerToName(gameObject.layer) + "/ (" + (1 + (int)(Random.value * 15f - Mathf.Epsilon)) + ")";
     audioSource.PlayOneShot(Resources.Load<AudioClip>(assetName));
     colorMenu.SetColor(LayerMask.LayerToName(gameObject.layer));
   }

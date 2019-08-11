@@ -77,9 +77,9 @@ MonoBehaviour:
   audioSource: {fileID: 5586667788684050422}
   animator: {fileID: 6840239119791262560}
   targets: []
-  maxFireRange: 30
-  maxFleeRange: 15
-  fireRate: 0.5
+  maxFireRange: 40
+  maxFleeRange: 20
+  fireRate: 0.2
 --- !u!50 &6840239119791262559
 Rigidbody2D:
   serializedVersion: 4
@@ -148,7 +148,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

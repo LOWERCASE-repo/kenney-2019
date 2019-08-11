@@ -12,10 +12,12 @@ public class Player : Ghost {
     alive = true;
   }
   
+  private float lastShot;
   protected override void Update() {
     base.Update();
-    if (Input.GetButtonDown("Shoot")) {
+    if (Input.GetButton("Shoot") && Time.time - lastShot > 0.2f) {
       Throw(mousePos);
+      lastShot = Time.time;
     }
     if (Time.timeScale < 1f) {
       spriteRenderer.sprite = nootNoot;

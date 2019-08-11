@@ -40,17 +40,18 @@ public class Bot : Ghost {
       }
     }
     
-    closestRange = (targets[targetIndex].position - rb.position).magnitude;
+    Vector2 target = targets[targetIndex].position;
+    closestRange = (target - rb.position).magnitude;
     Vector2 moveDir = Vector2.zero;
     if (closestRange < fleeRange) {
-      moveDir = rb.position - targets[targetIndex].position;
+      moveDir = rb.position - target;
     } else if (rb.velocity != Vector2.zero) {
-      moveDir = rb.velocity;
+      moveDir = rb.velocity + (target - rb.velocity).normalized * closestRange / 4f;
     }
     Move(moveDir + Random.insideUnitCircle);
     
     if (closestRange < fireRange && Random.value > 0.1f) {
-      Throw(targets[targetIndex].position);
+      Throw(target);
     }
   }
   

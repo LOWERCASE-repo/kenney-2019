@@ -46,8 +46,8 @@ public abstract class Ghost : Entity {
     Bullet bullet = bullets[index];
     bullet.Throw(pos - bullet.rb.position);
     index = (index + 1) % bullets.Length;
-    if (Time.time - lastPlayed > 0.5f) {
-      string assetName = "Music/" + LayerMask.LayerToName(gameObject.layer) + "/(" + (1 + (int)(Random.value * 15f - Mathf.Epsilon)) + ")";
+    if (Time.time - lastPlayed > 0.7f) {
+      string assetName = "Music/" + LayerMask.LayerToName(gameObject.layer) + "/ (" + (1 + (int)(Random.value * 15f - Mathf.Epsilon)) + ")";
       audioSource.PlayOneShot(Resources.Load<AudioClip>(assetName));
       lastPlayed = Time.time;
     }
