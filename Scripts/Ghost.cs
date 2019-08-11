@@ -29,7 +29,7 @@ public abstract class Ghost : Entity {
   [SerializeField]
   private Sprite sad;
   [SerializeField]
-  private AudioSource audioSource;
+  protected AudioSource audioSource;
   
   [SerializeField]
   protected Animator animator;

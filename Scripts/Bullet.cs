@@ -4,7 +4,7 @@ using System.Collections;
 public class Bullet : Entity {
   
   [SerializeField]
-  private Animator animator;
+  internal Animator animator;
   [SerializeField]
   private SpriteRenderer spriteRenderer;
   [SerializeField]
@@ -13,6 +13,9 @@ public class Bullet : Entity {
   private GameObject repeller;
   [SerializeField]
   private TrailRenderer trailRenderer;
+  
+  [SerializeField]
+  private bool dummy;
   
   private Collider2D collider;
   
@@ -46,7 +49,7 @@ public class Bullet : Entity {
     spriteRenderer.sprite = Resources.Load<Sprite>(assetName);
     spriteRenderer.sortingOrder = (Random.value < 0.5) ? -1 : 1;
     Destroy(GetComponent<PolygonCollider2D>());
-    collider = gameObject.AddComponent<PolygonCollider2D>();
+    if (!dummy) collider = gameObject.AddComponent<PolygonCollider2D>();
     rb.velocity = Random.insideUnitCircle;
     repeller.layer = LayerMask.NameToLayer("Repeller");
     trailRenderer.emitting = false;
