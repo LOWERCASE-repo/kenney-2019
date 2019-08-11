@@ -98,9 +98,9 @@ public abstract class Ghost : Entity {
       }
     }
     if (Time.timeScale == 1f) {
-      if (health > 6) {
+      if (health > 5) {
         spriteRenderer.sprite = happy;
-      } else if (health > 4) {
+      } else if (health > 3) {
         spriteRenderer.sprite = neutral;
       } else {
         spriteRenderer.sprite = sad;
